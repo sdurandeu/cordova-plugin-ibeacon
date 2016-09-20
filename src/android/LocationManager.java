@@ -46,6 +46,7 @@ import org.altbeacon.beacon.BleNotAvailableException;
 import org.altbeacon.beacon.Identifier;
 import org.altbeacon.beacon.MonitorNotifier;
 import org.altbeacon.beacon.RangeNotifier;
+import org.altbeacon.beacon.service.RangedBeacon;
 import org.altbeacon.beacon.Region;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -112,6 +113,10 @@ public class LocationManager extends CordovaPlugin implements BeaconConsumer {
 
         iBeaconManager = BeaconManager.getInstanceForApplication(cordovaActivity);
         iBeaconManager.setForegroundBetweenScanPeriod(foregroundBetweenScanPeriod);
+
+        // ADDED + import (up)
+        RangedBeacon.setSampleExpirationMilliseconds(1000);
+        // END ADDED
 
         initBluetoothListener();
         initEventQueue();
