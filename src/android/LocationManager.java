@@ -130,8 +130,8 @@ public class LocationManager extends CordovaPlugin implements BeaconConsumer {
             initBluetoothAdapter();
         }
         //TODO AddObserver when page loaded
-
-        tryToRequestMarshmallowLocationPermission();
+        // REMOVING (seba): location permission is already granted by the cordova-plugin-geolocation plugin
+        //tryToRequestMarshmallowLocationPermission();
     }
 
     /**
