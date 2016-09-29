@@ -11,11 +11,11 @@
     <js-module name="underscorejs" src="www/lib/underscore-min-1.6.js">
         <runs/>
     </js-module>
-  
+
     <js-module name="Q" src="www/lib/q.min.js">
         <runs/>
     </js-module>
-    
+
     <!-- Plugin source code: Core -->
     <js-module name="LocationManager" src="www/LocationManager.js">
         <!-- see http://cordova.apache.org/docs/en/3.0.0/plugin_ref_spec.md#Plugin%20Specification_js_module_element -->
@@ -46,18 +46,18 @@
 
 
     <platform name="ios">
-        
+
         <config-file parent="/*" target="config.xml">
             <feature name="LocationManager">
                 <param name="ios-package" value="CDVLocationManager"/>
             </feature>
         </config-file>
-        
+
         <config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
-            <string>Vinti require permisos de ubicación para pagar acercando tu teléfono.</string>
+            <string>Vinti require permisos de ubicación para mostrarte comercios cercanos y pagar acercando tu teléfono.</string>
         </config-file>
         <config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
-            <string>Vinti require permisos de ubicación para pagar acercando tu teléfono.</string>
+            <string>Vinti require permisos de ubicación para mostrarte comercios cercanos y pagar acercando tu teléfono.</string>
         </config-file>
 
         <config-file target="*-Info.plist" parent="UIBackgroundModes">
@@ -67,7 +67,7 @@
         </config-file>
 
         <header-file src="src/ios/CDVLocationManager.h"/>
-         
+
         <source-file src="src/ios/CDVLocationManager.m"/>
 
         <header-file src="src/ios/AppDelegate+CDVLocationManager.h"/>
@@ -118,7 +118,7 @@
                 </intent-filter>
             </service>
         </config-file>
-		
+
         <source-file src="src/android/LocationManager.java" target-dir="src/com/unarin/cordova/beacon" />
         <source-file src="src/android/IBeaconServiceNotifier.java" target-dir="src/com/unarin/cordova/beacon" />
         <source-file src="src/android/ILocationManagerCommand.java" target-dir="src/com/unarin/cordova/beacon" />
