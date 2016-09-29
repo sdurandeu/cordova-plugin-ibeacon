@@ -54,14 +54,20 @@
         </config-file>
         
         <config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
-            <string>This app would like to scan for iBeacons even when in the background.</string>
+            <string>Vinti require permisos de ubicación para pagar acercando tu teléfono.</string>
         </config-file>
         <config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
-            <string>This app would like to scan for iBeacons while it is in use.</string>
+            <string>Vinti require permisos de ubicación para pagar acercando tu teléfono.</string>
         </config-file>
-         
+
+        <config-file target="*-Info.plist" parent="UIBackgroundModes">
+          <array>
+            <string>location</string>
+          </array>
+        </config-file>
 
         <header-file src="src/ios/CDVLocationManager.h"/>
+         
         <source-file src="src/ios/CDVLocationManager.m"/>
 
         <header-file src="src/ios/AppDelegate+CDVLocationManager.h"/>
