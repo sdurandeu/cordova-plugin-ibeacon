@@ -60,12 +60,6 @@
             <string>Vinti require permisos de ubicación para mostrarte comercios cercanos y pagar acercando tu teléfono.</string>
         </config-file>
 
-        <config-file target="*-Info.plist" parent="UIBackgroundModes">
-          <array>
-            <string>location</string>
-          </array>
-        </config-file>
-
         <header-file src="src/ios/CDVLocationManager.h"/>
 
         <source-file src="src/ios/CDVLocationManager.m"/>
