@@ -1151,12 +1151,20 @@ public class LocationManager extends CordovaPlugin implements BeaconConsumer {
         });
     }
 
-
+    @TargetApi(BUILD_VERSION_CODES_M)
     private void isLocationPermissionGranted(CallbackContext callbackContext) {
 
         _handleCallSafely(callbackContext, new ILocationManagerCommand() {
             @Override
             public PluginResult run() {
+
+                if (Build.VERSION.SDK_INT < BUILD_VERSION_CODES_M) {
+                    Log.i(TAG, "isLocationPermissionGranted skipping because API code is " +
+                            "below criteria: " + String.valueOf(Build.VERSION.SDK_INT));
+                    PluginResult result = new PluginResult(PluginResult.Status.OK, true);
+                    result.setKeepCallback(true);
+                    return result;
+                }
 
                 final Activity activity = cordova.getActivity();
 
@@ -1194,7 +1202,6 @@ public class LocationManager extends CordovaPlugin implements BeaconConsumer {
                 }
             }
         });
-
     }
 
     /////////// SERIALISATION /////////////////////
