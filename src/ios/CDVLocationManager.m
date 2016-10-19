@@ -739,13 +739,25 @@
 
 - (void)disableBluetooth: (CDVInvokedUrlCommand*)command {
     [self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand *command) {
-        
+
         [[self getLogger] debugLog:@"Disable Bluetooth not required on iOS."];
-        
+
         CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         [result setKeepCallbackAsBool:YES];
         return result;
-        
+
+    } :command];
+}
+
+- (void)isLocationPermissionGranted: (CDVInvokedUrlCommand*)command {
+    [self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand *command) {
+
+        [[self getLogger] debugLog:@"isLocationPermissionGranted not required on iOS."];
+
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        [result setKeepCallbackAsBool:YES];
+        return result;
+
     } :command];
 }
 
