@@ -213,6 +213,8 @@ public class LocationManager extends CordovaPlugin implements BeaconConsumer {
             enableBluetooth(callbackContext);
         } else if (action.equals("disableBluetooth")) {
             disableBluetooth(callbackContext);
+        } else if (action.equals("isLocationPermissionGranted")) {
+            isLocationPermissionGranted(callbackContext);
         } else {
             return false;
         }
@@ -1149,6 +1151,51 @@ public class LocationManager extends CordovaPlugin implements BeaconConsumer {
         });
     }
 
+
+    private void isLocationPermissionGranted(CallbackContext callbackContext) {
+
+        _handleCallSafely(callbackContext, new ILocationManagerCommand() {
+            @Override
+            public PluginResult run() {
+
+                final Activity activity = cordova.getActivity();
+
+                final Method checkSelfPermissionMethod = getCheckSelfPermissionMethod();
+
+                if (checkSelfPermissionMethod == null) {
+                    Log.e(TAG, "Could not obtain the method Activity.checkSelfPermission method. Will " +
+                            "not check for ACCESS_COARSE_LOCATION even though we seem to be on a " +
+                            "supported version of Android.");
+                    return new PluginResult(PluginResult.Status.ERROR, "Could not obtain the method Activity.checkSelfPermission method");
+                }
+
+                try {
+                    final Integer permissionCheckResult = (Integer) checkSelfPermissionMethod.invoke(
+                            activity, Manifest.permission.ACCESS_COARSE_LOCATION);
+
+                    Log.i(TAG, "Permission check result for ACCESS_COARSE_LOCATION: " +
+                            String.valueOf(permissionCheckResult));
+
+                    if (permissionCheckResult == PackageManager.PERMISSION_GRANTED) {
+                        Log.i(TAG, "Permission for ACCESS_COARSE_LOCATION has already been granted.");
+                        PluginResult result = new PluginResult(PluginResult.Status.OK, true);
+                        result.setKeepCallback(true);
+                        return result;
+                    } else {
+                        Log.i(TAG, "Permission for ACCESS_COARSE_LOCATION has not been granted.");
+                        PluginResult result = new PluginResult(PluginResult.Status.OK, false);
+                        result.setKeepCallback(true);
+                        return result;
+                    }
+
+                } catch (Exception e) {
+                    debugWarn("'isLocationPermissionGranted' exception " + e.getMessage());
+                    return new PluginResult(PluginResult.Status.ERROR, e.getMessage());
+                }
+            }
+        });
+
+    }
 
     /////////// SERIALISATION /////////////////////
 

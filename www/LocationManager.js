@@ -547,6 +547,10 @@ LocationManager.prototype.appendToDeviceLog = function(message) {
 	return this._promisedExec('appendToDeviceLog', [message], []);
 };
 
+LocationManager.prototype.isLocationPermissionGranted = function() {
+	return this._promisedExec('isLocationPermissionGranted', [], []);
+};
+
 var locationManager = new LocationManager();
 locationManager.Regions = Regions;
 locationManager.Region = Region;
